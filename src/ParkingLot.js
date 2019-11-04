@@ -21,4 +21,7 @@ export default class ParkingLot{
         return this._slots.includes(car);
     }
 
+    unpark(car) {
+        return car;
+    }
 }
