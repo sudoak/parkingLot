@@ -22,6 +22,9 @@ export default class ParkingLot{
     }
 
     unpark(car) {
+        if(!this.isParked(car)){
+            throw new Error("Car is not parked in parking lot")
+        }
         return car;
     }
 }

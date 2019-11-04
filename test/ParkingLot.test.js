@@ -49,13 +49,12 @@ describe('parking lot', function () {
             expect(unparkedCar).toEqual(car);
         });
 
-        // it('should throw error car is not parked in parking lot message when given car is not parked', function () {
-        //     let parkingLot = new ParkingLot(1);
-        //     let car = new Car(34);
-        //     parkingLot.park(car);
-        //
-        //     expect(() => parkingLot.unpark(car)).toThrowError("Car is not parked in parking lot")
-        // });
+        it('should throw error car is not parked in parking lot message when given car is not parked', function () {
+            let parkingLot = new ParkingLot(1);
+            let car = new Car(34);
+
+            expect(() => parkingLot.unpark(car)).toThrowError("Car is not parked in parking lot")
+        });
 
     });
 });
