@@ -1,5 +1,5 @@
-import ParkingLot from "../src/ParkingLot";
-import Car from "../src/Car";
+import ParkingLot from "../src/parkinglot/ParkingLot";
+import Car from "../src/parkinglot/Car";
 
 
 describe('parking lot', function () {
@@ -56,5 +56,15 @@ describe('parking lot', function () {
             expect(() => parkingLot.unpark(car)).toThrowError("Car is not parked in parking lot")
         });
 
+    });
+
+    describe('#notify', function () {
+        it('should notify owner when parking lot is full', function () {
+            let parkingLot = new ParkingLot(1);
+            let parkingLot = new ParkingLot(1);
+            let owner = new Owner();
+
+            parkingLot.park(car);
+        });
     });
 });
