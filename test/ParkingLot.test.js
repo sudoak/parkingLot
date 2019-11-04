@@ -12,12 +12,12 @@ describe('parking lot', function () {
                 expect(parkingLot.isParked(car)).toBeTruthy();
             });
 
-        //     it('isParked should return false when car is not parked', function () {
-        //         let parkingLot = new ParkingLot(1);
-        //         let car = new Car();
-        //
-        //         expect(parkingLot.isParked(car)).toBeFalsy();
-        //     });
+            it('isParked should return false when car is not parked', function () {
+                let parkingLot = new ParkingLot(1);
+                let car = new Car();
+
+                expect(parkingLot.isParked(car)).toBeFalsy();
+            });
         //
         //     it('should throw parking lot is full when try to park a car in full parking lot', function () {
         //         let parkingLot = new ParkingLot(1);
