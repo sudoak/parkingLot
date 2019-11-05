@@ -1,14 +1,8 @@
 export default class ParkingLotObserver {
-    constructor() {
-        this._notified = false;
+    notifyParkingLotIsFull() {
 
     }
 
-    notify() {
-        this._notified = true;
-    }
-
-    hasNotify() {
-        return this._notified;
+    notifyParkingLotSpaceAvailable() {
     }
 }

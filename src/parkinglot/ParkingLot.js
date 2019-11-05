@@ -18,7 +18,7 @@ export default class ParkingLot{
         this._slots.push(car);
 
         if(this.isFull() && this._observers){
-            this._observers.forEach((observer) => {observer.notify()})
+            this._observers.forEach((observer) => {observer.notifyParkingLotIsFull()})
         }
     }
 
