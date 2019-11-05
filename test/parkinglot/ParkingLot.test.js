@@ -47,9 +47,9 @@ describe('parking lot', function () {
             let car = new Car(34);
             parkingLot.park(car);
 
-            let unparkedCar = parkingLot.unpark(car);
+            parkingLot.unpark(car);
 
-            expect(unparkedCar).toEqual(car);
+            expect(parkingLot.isParked(car)).toBeFalsy();
         });
 
         it('should throw error car is not parked in parking lot message when given car is not parked', function () {
@@ -57,6 +57,19 @@ describe('parking lot', function () {
             let car = new Car(34);
 
             expect(() => parkingLot.unpark(car)).toThrowError("Car is not parked in parking lot")
+        });
+
+
+        it('should be able to park car after unpark previous car', function () {
+            let parkingLot = new ParkingLot(1);
+            let car = new Car(34);
+
+            parkingLot.park(car);
+
+            parkingLot.unpark(car);
+            parkingLot.park(car);
+
+            expect(parkingLot.isParked(car)).toBeTruthy();
         });
 
     });
@@ -166,8 +179,26 @@ describe('parking lot', function () {
 
             parkingLot.unpark(car);
 
-            expect(owner.notifyParkingLotIsFull).toHaveBeenCalledTimes(1);
-            expect(trafficCop.notifyParkingLotIsFull).toHaveBeenCalledTimes(1);
+            expect(owner.notifyParkingLotSpaceAvailable).toHaveBeenCalledTimes(1);
+            expect(trafficCop.notifyParkingLotSpaceAvailable).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not notify traffic cop and owner when space is not full and  available in parking lot', () => {
+            let parkingLot = new ParkingLot(2);
+            let car = new Car(34);
+
+            let owner = new ParkingLotObserver();
+            let trafficCop = new ParkingLotObserver();
+
+            parkingLot.addObserver(owner);
+            parkingLot.addObserver(trafficCop);
+
+            parkingLot.park(car);
+
+            parkingLot.unpark(car);
+
+            expect(owner.notifyParkingLotSpaceAvailable).not.toHaveBeenCalled();
+            expect(trafficCop.notifyParkingLotSpaceAvailable).not.toHaveBeenCalled();
         });
 
     });
