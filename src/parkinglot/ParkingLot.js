@@ -8,7 +8,7 @@ export default class ParkingLot{
     }
 
     park(car) {
-        if(this._maxSpace === this._slots.length){
+        if(this.isFull()){
             throw new Error("Parking lot is full");
         }
 
@@ -17,9 +17,13 @@ export default class ParkingLot{
         }
         this._slots.push(car);
 
-        if(this._maxSpace === this._slots.length && this._observers){
+        if(this.isFull() && this._observers){
             this._observers.forEach((observer) => {observer.notify()})
         }
+    }
+
+    isFull() {
+        return this._maxSpace === this._slots.length;
     }
 
     isParked(car) {
