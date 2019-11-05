@@ -15,6 +15,10 @@ export default class ParkingLot{
             throw new Error("Car is already parked");
         }
         this._slots.push(car);
+
+        if(this._maxSpace === this._slots.length && this._owner){
+            this._owner.notify();
+        }
     }
 
     isParked(car) {
@@ -26,5 +30,9 @@ export default class ParkingLot{
             throw new Error("Car is not parked in parking lot")
         }
         return car;
+    }
+
+    addObserver(observer) {
+        this._owner = observer;
     }
 }

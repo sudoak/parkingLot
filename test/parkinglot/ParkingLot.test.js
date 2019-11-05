@@ -1,5 +1,6 @@
-import ParkingLot from "../src/parkinglot/ParkingLot";
-import Car from "../src/parkinglot/Car";
+import ParkingLot from "../../src/parkinglot/ParkingLot";
+import Car from "../../src/parkinglot/Car";
+import ParkingLotObserver from "../../src/parkinglot/ParkingLotObserver";
 
 
 describe('parking lot', function () {
@@ -59,12 +60,30 @@ describe('parking lot', function () {
     });
 
     describe('#notify', function () {
+
         it('should notify owner when parking lot is full', function () {
             let parkingLot = new ParkingLot(1);
-            let parkingLot = new ParkingLot(1);
-            let owner = new Owner();
+            let car = new Car(34);
+            let owner = new ParkingLotObserver();
+
+            parkingLot.addObserver(owner);
 
             parkingLot.park(car);
+            expect(owner.hasNotify()).toBeTruthy();
         });
+
+        it('should not notify owner when parking lot is not full', function () {
+            let parkingLot = new ParkingLot(2);
+            let car = new Car(34);
+            let owner = new ParkingLotObserver();
+
+            parkingLot.addObserver(owner);
+
+            parkingLot.park(car);
+
+            expect(owner.hasNotify()).toBeFalsy();
+        });
+
     });
+
 });

@@ -1,11 +1,10 @@
-export default class Owner{
-
+export default class ParkingLotObserver {
     constructor() {
         this._notified = false;
 
     }
 
-    notify(){
+    notify() {
         this._notified = true;
     }
 
