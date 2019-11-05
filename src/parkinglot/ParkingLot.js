@@ -3,6 +3,7 @@ export default class ParkingLot{
     constructor(maxSpace) {
         this._maxSpace = maxSpace;
         this._slots = [];
+        this._observers = [];
 
     }
 
@@ -16,8 +17,8 @@ export default class ParkingLot{
         }
         this._slots.push(car);
 
-        if(this._maxSpace === this._slots.length && this._owner){
-            this._owner.notify();
+        if(this._maxSpace === this._slots.length && this._observers){
+            this._observers.forEach((observer) => {observer.notify()})
         }
     }
 
@@ -33,6 +34,6 @@ export default class ParkingLot{
     }
 
     addObserver(observer) {
-        this._owner = observer;
+        this._observers.push(observer);
     }
 }

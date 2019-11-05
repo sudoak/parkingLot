@@ -84,6 +84,61 @@ describe('parking lot', function () {
             expect(owner.hasNotify()).toBeFalsy();
         });
 
+
+        it('should notify traffic cop when parking lot is full', function () {
+            let parkingLot = new ParkingLot(1);
+            let car = new Car(34);
+            let trafficCop = new ParkingLotObserver();
+
+            parkingLot.addObserver(trafficCop);
+
+            parkingLot.park(car);
+            expect(trafficCop.hasNotify()).toBeTruthy();
+        });
+
+        it('should not notify traffic cop when parking lot is not full', function () {
+            let parkingLot = new ParkingLot(2);
+            let car = new Car(34);
+            let trafficCop = new ParkingLotObserver();
+
+            parkingLot.addObserver(trafficCop);
+
+            parkingLot.park(car);
+
+            expect(trafficCop.hasNotify()).toBeFalsy();
+        });
+
+        it('should notify traffic cop and owner when parking lot is full', function () {
+            let parkingLot = new ParkingLot(1);
+            let car = new Car(34);
+            let owner = new ParkingLotObserver();
+            let trafficCop = new ParkingLotObserver();
+
+            parkingLot.addObserver(owner);
+            parkingLot.addObserver(trafficCop);
+
+            parkingLot.park(car);
+
+            expect(owner.hasNotify()).toBeTruthy();
+            expect(trafficCop.hasNotify()).toBeTruthy();
+        });
+
+        it('should not notify traffic cop and owner when parking lot is not full', function () {
+            let parkingLot = new ParkingLot(2);
+            let car = new Car(34);
+
+            let owner = new ParkingLotObserver();
+            let trafficCop = new ParkingLotObserver();
+
+            parkingLot.addObserver(owner);
+            parkingLot.addObserver(trafficCop);
+
+            parkingLot.park(car);
+
+            expect(owner.hasNotify()).toBeFalsy();
+            expect(trafficCop.hasNotify()).toBeFalsy();
+        });
+
     });
 
 });
